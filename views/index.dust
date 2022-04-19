@@ -1,0 +1,133 @@
+{> "layout" /}
+
+{< body}
+<h1>read & add recipies</h1>
+<button class="btn btn-primary btn-block adding-btn"
+ data-bs-toggle="modal"
+data-bs-target="#formModal">add receipe</button>
+<hr>
+<br>
+
+<div class="accordion  pt-5 " id="accordionExample">
+  {#data}
+  <div class="accordion-item mb-4 shadow p-2 mb-5 bg-body rounded">
+    <h1 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#data_{id}"
+      aria-expanded="true" aria-controls="data_{id}">
+        {name}
+      </button>
+    </h1>
+    <div id="data_{id}" class="accordion-collapse collapse"
+      aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>ingredients: </strong>
+        <p>{ingredients}</p>
+        <strong>directions: </strong>
+        <p>{directions}</p>
+        <br/>
+        <hr />
+        <button class="btn btn-success edit-recipe"
+        data-bs-toggle="modal"
+        data-bs-target="#editModal"
+        data-id="{id}" data-name="{name}"
+        data-ingredients="{ingredients}" data-directions="{directions}">
+          edit
+        </button>
+        <button class="btn btn-danger delete-recipe"
+        data-id="{id}">
+          delete
+        </button>
+      </div>
+    </div>
+  </div>
+  {/data}
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="formModal"
+  tabindex="-1" aria-labelledby="formModalLabel"
+  aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="/add">
+          <div class="modal-header">
+           <h5 class="modal-title" id="formModal">add receipe</h5>
+          <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class=" mb-3">receip name</label>
+            <input type="text" name="name"
+            placeholder="name of the receipe" class="form-control">
+          </div>
+          <br>
+          <div class="form-group">
+            <label class=" mb-3">ingredients</label>
+            <input type="text" name="ingredients"
+            placeholder="ingredientsf" class="form-control">
+          </div>
+          <br>
+          <div class="form-group">
+            <label class=" mb-3">directions</label>
+            <textarea type="text" name="directions"
+            placeholder="directions" class="form-control">
+          </textarea>
+          </div>
+          <br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+          data-bs-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" value="Save changes" />
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- edit Modal -->
+  <div class="modal fade" id="editModal"
+  tabindex="-1" aria-labelledby="editModalLabel"
+  aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="/edit">
+          <input type="hidden" id="edit-form-id" name="id" value="">
+          <div class="modal-header">
+           <h5 class="modal-title" id="editModal">edit receipe</h5>
+          <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class=" mb-3">receip name</label>
+            <input id="edit-form-name" type="text" name="name"
+            placeholder="name of the receipe" class="form-control">
+          </div>
+          <br>
+          <div class="form-group">
+            <label class=" mb-3">ingredients</label>
+            <input type="text" id="edit-form-ingredients" name="ingredients"
+            placeholder="ingredientsf" class="form-control">
+          </div>
+          <br>
+          <div class="form-group">
+            <label class=" mb-3">directions</label>
+            <textarea type="text" id="edit-form-directions" name="directions"
+            placeholder="directions" class="form-control">
+          </textarea>
+          </div>
+          <br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+          data-bs-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" value="Save changes" />
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{/ body}
